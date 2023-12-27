@@ -23,15 +23,21 @@ class Node
   end
 end
 
+# ordered collection of nodes
+# all values to left of root node are less
+# all values to right of root node are greater
 class Tree
+  # given an array of values, create a tree
   def initialize(arr = nil)
     @arr = arr
-    @root = build_tree
+    # need to find the middle of the sorted arr to set the root index
+    @root = find_middle_index
   end
 
-  def build_tree(arr)
+  def find_middle_index(arr)
+    return nil if array.nil?
+
     arr = arr.uniq.sort
-    arr.each { |e| Node.new(e) }
     mid = arr.length / 2
     mid.floor
   end
