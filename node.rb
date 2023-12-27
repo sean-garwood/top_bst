@@ -1,16 +1,6 @@
 # frozen_string_literal: true
 
-# bonus: compare nodes using data.
-module Comparable
-  def same_data?(node_a, node_b)
-    node_a.data == node_b.data
-  end
-
-  def less_than?(node_a, node_b)
-    node_a.data < node_b.data
-  end
-end
-
+require_relative 'comparable'
 # represents a node on a binary search tree
 class Node
   include Comparable
@@ -40,5 +30,13 @@ class Tree
     arr = arr.uniq.sort
     mid = arr.length / 2
     mid.floor
+  end
+
+  def one_left(index)
+    index - 1
+  end
+
+  def one_right(index)
+    index + 1
   end
 end
