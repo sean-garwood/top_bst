@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-require 'pry-byebug'
+# Build BST from an array.
+class Tree
+  attr_reader :arr, :root
 
-# helper fns
-module Helpers
-  # sanitize input by deduplicating and sorting array destructively.
-  def clean(arr)
-    arr.empty? && [] || arr.uniq.sort
+  def initialize(arr = [])
+    @arr = arr.uniq.sort
+    @root = build_tree(@arr)
   end
 
   def print_tree(node = @root, prefix = '', is_left = true)
@@ -19,33 +19,6 @@ module Helpers
       puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
       print_tree(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
     end
-  end
-end
-
-# element in a binary search tree.
-# contains @data, which is a value, and two pointers: @left and @right, which
-# point to the @root of the child nodes
-class Node
-  attr_accessor :data, :left, :right
-
-  def initialize(data)
-    @data = data
-    @left = nil
-    @right = nil
-  end
-
-end
-
-# ordered collection of nodes
-# all values to left of root node are less
-# all values to right of root node are greater
-class Tree
-  include Helpers
-  attr_reader :arr, :root
-
-  def initialize(arr = nil)
-    @arr = clean(arr)
-    @root = build_tree(@arr)
   end
 
   private
@@ -61,7 +34,6 @@ class Tree
   end
 
   def build_tree(arr)
-    arr = clean(arr)
     if arr.empty?
       return
     elsif arr.length == 1
@@ -78,8 +50,3 @@ class Tree
     @root
   end
 end
-
-foo = Array.new(15) { rand(1..100) }
-bar = Tree.new(foo)
-
-bar.print_tree
