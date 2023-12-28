@@ -3,7 +3,7 @@
 require_relative 'node'
 require_relative 'tree'
 
-foo = Array.new(15) { rand(1..100) }
+foo = Array.new(4) { rand(1..100) }
 bar = Tree.new(foo)
 
-bar.print_tree
+bar.pretty_print
