@@ -9,16 +9,10 @@ class Tree
     @root = build_tree(@arr)
   end
 
-  def print_tree(node = @root, prefix = '', is_left = true)
-    return unless node
-
-    if node.is_a?(Tree)
-      print_tree(node.root, prefix, is_left)
-    else
-      print_tree(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
-      puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
-      print_tree(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
-    end
+  def pretty_print(node = @root, prefix = '', is_left = true)
+    pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
+    puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
+    pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
   end
 
   private
@@ -26,27 +20,21 @@ class Tree
   attr_writer :arr, :root
 
   def left_side(arr, mid)
-    arr[..mid - 1]
+    mid.zero? && nil || arr[..mid - 1]
   end
 
   def right_side(arr, mid)
-    arr[mid + 1..]
+    mid.zero? && nil || arr[mid + 1..]
   end
 
   def build_tree(arr)
-    if arr.empty?
-      return
-    elsif arr.length == 1
-      @root = Node.new(arr[0])
-    else
-      mid = arr.length / 2.floor
-      @root = Node.new(arr[mid])
-      left_child = left_side(arr, mid)
-      right_child = right_side(arr, mid)
-      @root.left = Tree.new(left_child)
-      @root.right = Tree.new(right_child)
-    end
+    mid = arr.length / 2.floor
+    return Node.new(arr[0]) if mid.zero?
 
-    @root
+    root_node = Node.new(arr[mid])
+    root_node.left = build_tree(left_side(arr, mid))
+    root_node.right = build_tree(right_side(arr, mid))
+
+    root_node
   end
 end
