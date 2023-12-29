@@ -29,12 +29,11 @@ class Tree
 
   def build_tree(arr)
     mid = arr.length / 2.floor
-    return Node.new(arr[0]) if mid.zero?
-
     root_node = Node.new(arr[mid])
+    return root_node if mid.zero?
+
     root_node.left = build_tree(left_side(arr, mid))
     root_node.right = build_tree(right_side(arr, mid))
-
     root_node
   end
 end
