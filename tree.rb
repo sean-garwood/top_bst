@@ -2,6 +2,7 @@
 
 # Build BST from an array.
 class Tree
+include Comparable
   attr_reader :arr, :root
 
   def initialize(arr = [])
@@ -13,6 +14,14 @@ class Tree
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
     pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
+  end
+
+  def insert(data)
+    case
+    when less_than?(data, @root.data)
+    end
+
+    # some code
   end
 
   private
