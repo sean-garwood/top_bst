@@ -19,21 +19,13 @@ class Tree
 
   attr_writer :arr, :root
 
-  def left_side(arr, mid)
-    mid.zero? && nil || arr[..mid - 1]
-  end
-
-  def right_side(arr, mid)
-    mid.zero? && nil || arr[mid + 1..]
-  end
-
   def build_tree(arr)
     mid = arr.length / 2.floor
     root_node = Node.new(arr[mid])
     return root_node if mid.zero?
 
-    root_node.left = build_tree(left_side(arr, mid))
-    root_node.right = build_tree(right_side(arr, mid))
+    root_node.left = build_tree(arr[..mid - 1])
+    root_node.right = build_tree(arr[mid + 1..])
     root_node
   end
 end
