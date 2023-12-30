@@ -17,19 +17,13 @@ class Tree
   end
 
   def insert(data)
-    return @root = Node.new(data) if @root.nil?
+    new_node = Node.new(data)
+    return @root = new_node if @root.nil?
     return if same?(data, @root.data)
 
-    new_node = Node.new(data)
-    # store the last node that was compared so its left/right attrib can be
-    #    modified when the proper placement is found for the new node
-    # need to reset the prev. node's left or right attr
-    #   if last < new, last.left = new
-    #   if last > new, last.right = new
     parent = find_parent
-    parent <=> new_node.negative? parent.left = new_node : parent.right = new_node
+    parent <=> new_node.negative? ? parent.left = new_node : parent.right = new_node
   end
-
 
   private
 
@@ -48,15 +42,9 @@ class Tree
   def find_parent
     parent = @root
     current = last
-    # proc to send different nodes to compare to a block that returns the next
-    # node: left if
     next_node = proc do
       less_than?(current, new_node) ? current.left : current.right
     end
-    # compare the current node and the new_node
-    # update next_node and last until the following conditions are met:
-    #   new_node > last
-    #   new_node < next
     until greater_than?(new_node, parent) && less_than?(new_node, next_node)
       parent = current
       current = next_node.call
