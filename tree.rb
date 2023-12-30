@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative 'comparable'
 # Build BST from an array.
 class Tree
   include Comparable
@@ -19,9 +20,9 @@ class Tree
   def insert(data)
     new_node = Node.new(data)
     return @root = new_node if @root.nil?
-    return if same?(data, @root.data)
+    return if same?(new_node, @root)
 
-    parent = find_parent
+    parent = find_parent(new_node)
     parent <=> new_node.negative? ? parent.left = new_node : parent.right = new_node
   end
 
@@ -39,14 +40,14 @@ class Tree
     root_node
   end
 
-  def find_parent
+  def find_parent(node)
     parent = @root
-    current = last
-    next_node = proc do
-      less_than?(current, new_node) ? current.left : current.right
-    end
-    until greater_than?(new_node, parent) && less_than?(new_node, next_node)
+    current = parent
+    next_node = proc { less_than?(current, node) ? current.left : current.right }
+    until greater_than?(node, parent) && less_than?(node, next_node)
       parent = current
       current = next_node.call
     end
+    parent
+  end
 end
