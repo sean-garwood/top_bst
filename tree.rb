@@ -2,7 +2,7 @@
 
 # Build BST from an array.
 class Tree
-include Comparable
+  include Comparable
   attr_reader :arr, :root
 
   def initialize(arr = [])
@@ -17,12 +17,24 @@ include Comparable
   end
 
   def insert(data)
-    case
-    when less_than?(data, @root.data)
-    end
+    return if same?(data, @root.data)
 
-    # some code
+    new_node = Node.new(data)
+    # store the last node that was compared so its left/right attrib can be
+    #    modified when the proper placement is found for the new node
+    last = @root
+    current = last
+    # proc to send different nodes to compare to a block that returns the next
+    # node: left if
+    next_node = proc do
+      less_than?(current, new_node) ? current.left : current.right
+    end
+    # need to set last.left or right depending on last path taken
+
+    end
+    # what to do after we find neighbors?
   end
+
 
   private
 
