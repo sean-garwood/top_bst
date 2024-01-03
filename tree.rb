@@ -18,15 +18,6 @@ class Tree
     pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
   end
 
-  # FIXIT
-  def insert(data)
-    new_node = Node.new(data)
-    return @root = new_node if @root.nil?
-    return if same?(new_node, @root)
-
-    parent = find_parent(new_node)
-  end
-
   private
 
   attr_writer :arr
@@ -40,11 +31,4 @@ class Tree
     node.right = build_tree(arr[mid + 1..]) unless arr[mid + 1..].empty?
     node
   end
-
-  # FIXIT
-  def find_parent(node)
-    return nil if less_than?(node, @root)
-
-  end
-
 end
