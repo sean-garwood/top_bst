@@ -11,4 +11,21 @@ class Node
     @left = nil
     @right = nil
   end
+
+  def leaf?
+    @left.nil? && @right.nil?
+  end
+
+  # FIXIT
+  def direction(node, current)
+    return if current.leaf?
+
+    return :left if less_than?(node, current) || current.right.nil?
+
+    :right
+  end
+
+  def make_baby(child)
+    less_than?(self, child) ? child.left = self : child.right = self
+  end
 end
