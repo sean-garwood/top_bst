@@ -7,7 +7,9 @@ module Comparable
   end
 
   def less_than?(node_a, node_b)
-    node_a.data < node_b.data
+    return false if node_b.nil?
+
+    node_a.nil? || node_a.data < node_b.data
   end
 
   def greater_than?(node_a, node_b)
