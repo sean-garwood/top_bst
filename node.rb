@@ -4,6 +4,7 @@
 # contains @data, which is a value, and two pointers: @left and @right, which
 # point to the @root of the child nodes
 class Node
+  include Comparable
   attr_accessor :data, :left, :right
 
   def initialize(data)
@@ -16,16 +17,7 @@ class Node
     @left.nil? && @right.nil?
   end
 
-  # FIXIT
-  def direction(node, current)
-    return if current.leaf?
-
-    return :left if less_than?(node, current) || current.right.nil?
-
-    :right
-  end
-
   def make_baby(child)
-    less_than?(self, child) ? child.left = self : child.right = self
+    less_than?(child, self) ? self.left = child : self.right = child
   end
 end

@@ -22,12 +22,7 @@ class Tree
     new_node = Node.new(data)
     return @root = new_node if empty?
 
-    # one_element? && @root.make_baby(new_node)
-    current = @root
-    until current.leaf?
-      current = current.direction(new_node, current)
-    end
-    current.make_baby(new_node)
+    find_parent(new_node, @root).make_baby(new_node)
   end
 
   private
@@ -42,6 +37,20 @@ class Tree
     node.left = build_tree(arr[..mid - 1]) unless arr[..mid - 1].empty?
     node.right = build_tree(arr[mid + 1..]) unless arr[mid + 1..].empty?
     node
+  end
+
+  def find_parent(child, current)
+    until current.leaf?
+      dir = direction(child, current)
+      dir.negative? && current = current.left || current = current.right
+    end
+    current
+  end
+
+  def direction(node, current)
+    return if current.leaf?
+
+    less_than?(node, current) || current.right.nil? ? -1 : 1
   end
 
   def empty?
