@@ -21,10 +21,25 @@ class Tree
   # FIXIT
   def insert(data)
     new_node = Node.new(data)
-    return @root = new_node if @root.nil?
-    return if same?(new_node, @root)
+    return @root = new_node if empty?
+
+    case one_element?
+    when less_than?(new_node, @root)
+      return @root.left = new_node
+    when greater_than?(new_node, @root)
+      return @root.right = new_node
+    end
+    # if there is more than one element, then the new_node necessarily has a
+    # parent node.
+
+    # to find it, call a find_parent method that accepts the node
+    # as an argument and traverses the tree looking for its parent.
+
+
+
 
     parent = find_parent(new_node)
+
   end
 
   private
@@ -41,10 +56,21 @@ class Tree
     node
   end
 
+  def empty?
+    @root.nil?
+  end
+
+  def one_element?
+    @root.left.nil? && @root.right.nil?
+  end
+
   # FIXIT
   def find_parent(node)
-    return nil if less_than?(node, @root)
+    # in a room holding a number. The room has an address: its data.
+    parent = @root
 
   end
+
+
 
 end
