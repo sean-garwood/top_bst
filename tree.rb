@@ -18,13 +18,11 @@ class Tree
     pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
   end
 
-  # FIXIT
   def insert(data)
     new_node = Node.new(data)
-    return @root = new_node if @root.nil?
-    return if same?(new_node, @root)
+    return @root = new_node if empty?
 
-    parent = find_parent(new_node)
+    find_parent(new_node, @root).make_baby(new_node)
   end
 
   private
