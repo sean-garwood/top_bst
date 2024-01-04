@@ -27,6 +27,10 @@ class Tree
     find_parent(new_node, @root).make_baby(new_node)
   end
 
+  def empty?
+    @root.nil?
+  end
+
   private
 
   attr_writer :arr
@@ -39,9 +43,5 @@ class Tree
     node.left = build_tree(arr[..mid - 1]) unless arr[..mid - 1].empty?
     node.right = build_tree(arr[mid + 1..]) unless arr[mid + 1..].empty?
     node
-  end
-
-  def empty?
-    @root.nil?
   end
 end
