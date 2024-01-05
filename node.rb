@@ -17,12 +17,6 @@ class Node
     @left.nil? && @right.nil?
   end
 
-  def find_next(node, current)
-    return if current.leaf?
-
-    less_than?(node, current) || current.right.nil? ? current.left : current.right
-  end
-
   def make_baby(child)
     less_than?(child, self) ? self.left = child : self.right = child
   end

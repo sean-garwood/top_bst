@@ -25,6 +25,6 @@ module Search
     return @root if same?(@root.data, value)
 
     node = Node.new(value)
-    stop_at(node) { |current| current.leaf? || same?(node, current)}
+    stop_at(node) { |current| current.leaf? || same?(node, current) }
   end
 end
