@@ -2,16 +2,16 @@
 
 # Search for nodes in the BST.
 module Search
-  def direction(node, current)
+  def find_next(node, current)
     return if current.leaf?
 
-    less_than?(node, current) || current.right.nil? ? -1 : 1
+    less_than?(node, current) || current.right.nil? ? current.left : current.right
   end
 
   def find_parent(child, current)
-    until current.leaf?
-      dir = direction(child, current)
-      dir.negative? && current = current.left || current = current.right
+    loop do
+      current = find_next(child, current)
+      break if current.leaf?
     end
     current
   end
@@ -21,10 +21,10 @@ module Search
 
     node = Node.new(value)
     current = @root
-    until same?(node, current) || current.leaf?
-      dir = direction(node, current)
-      dir.negative? && current = current.left || current = current.right
+    loop do
+      current = find_next(node, current)
+      break if same?(node, current) || current.leaf?
     end
-    current
+    same?(current, node) ? current : nil
   end
 end
