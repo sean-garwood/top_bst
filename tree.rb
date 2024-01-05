@@ -24,7 +24,7 @@ class Tree
     new_node = Node.new(data)
     return @root = new_node if empty?
 
-    find_parent(new_node, @root).make_baby(new_node)
+    find_parent(new_node).make_baby(new_node)
   end
 
   def empty?
