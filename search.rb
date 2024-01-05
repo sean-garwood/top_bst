@@ -8,10 +8,10 @@ module Search
     less_than?(node, current) || current.right.nil? ? current.left : current.right
   end
 
-  def find_parent(child, current)
+  def browse_tree(node, current = @root, &breaker)
     loop do
-      current = find_next(child, current)
-      break if current.leaf?
+      current = find_next(node, current)
+      break if breaker.call
     end
     current
   end
@@ -20,11 +20,13 @@ module Search
     return if value.nil? || empty?
 
     node = Node.new(value)
-    current = @root
-    loop do
-      current = find_next(node, current)
-      break if same?(node, current) || current.leaf?
-    end
+    same_or_bust = ->(a, b) { same?(node, current) || current.leaf? }
+    current = browse_tree(node, same_or_bust)
     same?(current, node) ? current : nil
+  end
+
+  def find_parent(child, current = @root)
+    check_if_leaf = ->(node) { node.leaf? }
+    browse_tree(child, check_if_leaf)
   end
 end
