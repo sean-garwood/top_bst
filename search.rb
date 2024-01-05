@@ -17,7 +17,7 @@ module Search
   end
 
   def find_parent(child)
-    stop_at(child) { |current| current.leaf? }
+    stop_at(child, &:leaf?)
   end
 
   def find(value)
