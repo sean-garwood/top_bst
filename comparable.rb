@@ -2,17 +2,15 @@
 
 # bonus: compare nodes using data.
 module Comparable
-  def same?(node_a, node_b)
-    node_a.data == node_b.data
+  def same?(node)
+    @data == node.data
   end
 
-  def less_than?(node_a, node_b)
-    return if node_b.nil?
-
-    node_a.nil? || node_a.data < node_b.data
+  def less_than?(node)
+    @data < node.data unless same?(node)
   end
 
-  def greater_than?(node_a, node_b)
-    !less_than?(node_a, node_b)
+  def greater_than?(node)
+    !less_than?(node) unless same?(node)
   end
 end
