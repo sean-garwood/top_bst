@@ -37,12 +37,18 @@ class Tree
   attr_writer :arr
 
   def build_tree(arr)
-    mid = arr.length / 2.floor
+    start = 0
+    arr_end = arr.length - 1
+    mid = (start + arr_end) / 2
     node = Node.new(arr[mid])
-    return node if mid.zero?
+    return node if mid.same?(arr_end) && mid.zero?
 
-    node.left = build_tree(arr[..mid - 1]) unless arr[..mid - 1].empty?
-    node.right = build_tree(arr[mid + 1..]) unless arr[mid + 1..].empty?
+    # since mid and arr_end are ints, i tried just comparing using the ==
+    # operator, but that did not work.
+
+    node.left = build_tree(arr[..mid - 1]) unless mid.zero?
+    node.right = build_tree(arr[mid + 1..]) # for some reason,
+    # `unless mid.zero?` clause here cuts off the greatest element.
     node
   end
 end
