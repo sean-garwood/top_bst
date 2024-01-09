@@ -3,7 +3,7 @@
 # compare nodes using data.
 module Comparable
   def compare(nodes)
-    nil_to_zero = ->(node) { node.nil? || node.data = 0 }
+    nil_to_zero = ->(node) { node.nil? && node.data = 0 }
 
     nodes.map { |node| nil_to_zero.call(node) }.sort
     nodes[0] <=> nodes[1]
