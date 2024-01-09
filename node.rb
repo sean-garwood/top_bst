@@ -14,10 +14,16 @@ class Node
   end
 
   def leaf?
+    return if nil?
+
     @left.nil? && @right.nil?
   end
 
+  def one_child?
+    @rright.nil?
+  end
+
   def make_baby(child)
-    less_than?(child, self) ? self.left = child : self.right = child
+    less_than?(child) ? @left = child : @right = child
   end
 end
