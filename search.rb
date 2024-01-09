@@ -25,6 +25,7 @@ module Search
     return @root.data if value == @root.data
 
     node = Node.new(value)
-    stop_at(node) { |curr| curr.leaf? || node == curr }.data
+    closest = stop_at(node) { |curr| curr.leaf? || node.same?(curr) }
+    closest.same?(node) && closest || nil
   end
 end
