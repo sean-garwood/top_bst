@@ -13,7 +13,7 @@ module Search
   def find_next(node, current = @root)
     return if current.leaf?
 
-    less_than?(node, current) || current.right.nil? ? current.left : current.right
+    node.less_than?(current) || current.right.nil? ? current.left : current.right
   end
 
   def find_parent(child)
