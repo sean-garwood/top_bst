@@ -2,16 +2,26 @@
 
 # bonus: compare nodes using data.
 module Comparable
-  def same?(node)
-    return if node.nil? && !@data.nil?
+  def compare(nodes, &oper)
+    comparable = extract_data(nodes)
 
-    @data == node.data || @data.nil? && node.data.nil?
+    oper.call(comparable)
+  end
+
+  def extract_data(nodes)
+    nil_to_zero = proc { |data| data = 0 if data.nil? }
+
+    nodes.map { |node| nil_to_zero.call(node.data) }
+  end
+
+  def same?(node)
+    comparable = extract_data([self, node])
+
+    comparable[0] == comparable[1]
   end
 
   def less_than?(node)
-    return if same?(node) || @data.nil?
-
-    node.data.nil? || node.data < @data
+    @data < node.data
   end
 
   def greater_than?(node)
