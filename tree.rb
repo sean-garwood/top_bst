@@ -2,6 +2,7 @@
 
 require_relative 'comparable'
 require_relative 'search'
+require_relative 'node'
 # Build BST from an array.
 class Tree
   include Comparable

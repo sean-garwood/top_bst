@@ -2,18 +2,18 @@
 
 # Search for nodes in the BST.
 module Search
-  def stop_at(node, current = @root)
+  def stop_at(node, curr = @root)
     loop do
-      current = find_next(node, current)
-      break if yield(current)
+      curr = find_next(node, curr)
+      break if yield(curr)
     end
-    current
+    curr
   end
 
-  def find_next(node, current = @root)
-    return if current.leaf?
+  def find_next(node, curr = @root)
+    return if curr.leaf?
 
-    node.less_than?(current) || current.right.nil? ? current.left : current.right
+    node.less_than?(curr) ? curr.left : curr.right
   end
 
   def find_parent(child)
@@ -22,9 +22,9 @@ module Search
 
   def find(value)
     return if empty?
-    return @root if same?(@root.data, value)
+    return @root.data if value == @root.data
 
     node = Node.new(value)
-    stop_at(node) { |current| current.leaf? || same?(node, current) }
+    stop_at(node) { |curr| curr.leaf? || node == curr }.data
   end
 end
