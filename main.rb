@@ -3,7 +3,12 @@
 require_relative 'node'
 require_relative 'tree'
 
-foo = Array.new(6) { rand(1..100) }
-bar = Tree.new(foo)
+module TestArrays
+  BASIC_ARR = [1, 2, 3, 4]
+  LONG_BASIC = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  REALLY_LONG = Array.new(64) { rand(1..100) }
+end
 
-puts "#{bar.pretty_print}\n\n"
+Tree.new(TestArrays::BASIC_ARR).pretty_print
+Tree.new(TestArrays::LONG_BASIC).pretty_print
+Tree.new(TestArrays::REALLY_LONG).pretty_print
