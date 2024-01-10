@@ -14,8 +14,6 @@ class Node
   end
 
   def leaf?
-    return if nil?
-
     @left.nil? && @right.nil?
   end
 
