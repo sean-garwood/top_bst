@@ -42,10 +42,8 @@ class Tree
     node = Node.new(arr[mid])
     return node if mid.zero?
 
-    left_side = arr[..mid - 1]
-    right_side = arr[mid + 1..]
-    node.left = build_tree(left_side)
-    node.right = build_tree(right_side) unless right_side.empty?
+    node.left = build_tree(arr[..mid - 1]) unless arr[..mid - 1].empty?
+    node.right = build_tree(arr[mid + 1..]) unless arr[mid + 1..].empty?
     # for some reason,
     # `unless mid.zero?` clause here cuts off the greatest element.
     node
