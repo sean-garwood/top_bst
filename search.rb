@@ -16,10 +16,10 @@ module Search
     curr
   end
 
-  def find(value)
+  def find(data)
     return if empty?
 
-    proxy = Node.new(value)
+    proxy = Node.new(data)
     closest = scan_tree(proxy) { |curr| (curr.leaf? || proxy.same?(curr)) }
     closest.same?(proxy) && closest || nil
   end
