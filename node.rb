@@ -24,6 +24,6 @@ class Node
   end
 
   def make_baby(child)
-    less_than?(child) ? @left = child : @right = child
+    less_than?(child) ? @right = child : @left = child
   end
 end
