@@ -14,7 +14,7 @@ class Node
   end
 
   def leaf?
-    @left.nil? && @right.nil?
+    @left.nil? # well-ordered principle
   end
 
   def one_child?
