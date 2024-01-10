@@ -11,7 +11,7 @@ class Tree
   attr_reader :arr
 
   def initialize(arr = [])
-    @arr = arr.uniq.sor
+    @arr = arr.uniq.sort
     @root = build_tree(@arr)
   end
 
@@ -29,25 +29,32 @@ class Tree
     parent.same?(new_node) ? nil : parent.make_baby(new_node)
   end
 
-  def delete(value)
-    return if find(value).nil?
+  def delete(data)
+    return if empty? || find(data).nil?
 
-    # consider what happens:
-    #   either find the node or don't.
+    # either find the node or don't.
 
-    del = find(value)
+    del = find(data)
+    # need to remember parent, or last visited element, then set any children
+    # equal to node to nil
+    parent = scan_tree(del) { |curr| curr.parent_of?(del) }
+
+    # three cases:
     #   node is a leaf
     #   node has one child
     #   node has two children
 
     # node is leaf
-    #   delete node from tree
-    #   set parent.[dir] = nil
-    # dir = last direction
-    # curr = node thatt
+    if del.leaf?
+      parent.less_than?(del) ? parent.right = nil : parent.left = nil
+    else
+      puts 'fail'
+    end
 
-    # need to remember parent, or last visited element, then set any children
-    # equal to node to nil
+    # node has one child
+    # elsif del.one_child?
+    #   @del.right.nil? ? parent
+
 
     # node has one child
     #   replace deleted node with its child
@@ -55,6 +62,7 @@ class Tree
 
     # node has two children
     #   find 'inorder' successor of node
+    del
   end
 
   def empty?

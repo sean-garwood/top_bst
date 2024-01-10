@@ -19,4 +19,5 @@ foo.pretty_print
 
 puts "here it is: 100! -=-#{foo.find(100).data}"
 
-# baz.pretty_print
+bar.delete(1)
+bar.pretty_print
