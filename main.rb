@@ -13,9 +13,10 @@ foo = Tree.new(TestArrays::BASIC_ARR)
 bar = Tree.new(TestArrays::LONG_BASIC)
 baz = Tree.new(TestArrays::REALLY_LONG)
 
-foo.pretty_print
 foo.insert(100)
 
 foo.pretty_print
 
-baz.pretty_print
+puts "here it is: 100! -=-#{foo.find(100).data}-=-"
+
+# baz.pretty_print

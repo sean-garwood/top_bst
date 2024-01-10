@@ -16,15 +16,11 @@ module Search
     node.less_than?(curr) ? curr.left : curr.right
   end
 
-  def find_parent(child)
-    stop_at(child, &:leaf?)
-  end
-
   def find(value)
     return if empty?
 
     node = Node.new(value)
-    closest = stop_at(node) { |curr| curr.leaf? || node.same?(curr) }
+    closest = stop_at(node) { |curr| (curr.leaf? || node.same?(curr)) }
     closest.same?(node) && closest || nil
   end
 end
