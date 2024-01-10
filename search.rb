@@ -8,7 +8,7 @@ module Search
     node.less_than?(curr) ? curr.left : curr.right
   end
 
-  def stop_at(node, curr = @root)
+  def scan_tree(node, curr = @root)
     loop do
       curr = next_node(node, curr)
       break if yield(curr)
@@ -20,7 +20,7 @@ module Search
     return if empty?
 
     proxy = Node.new(value)
-    closest = stop_at(proxy) { |curr| (curr.leaf? || proxy.same?(curr)) }
+    closest = scan_tree(proxy) { |curr| (curr.leaf? || proxy.same?(curr)) }
     closest.same?(proxy) && closest || nil
   end
 end

@@ -11,7 +11,7 @@ class Tree
   attr_reader :arr
 
   def initialize(arr = [])
-    @arr = arr.uniq.sort
+    @arr = arr.uniq.sor
     @root = build_tree(@arr)
   end
 
@@ -25,7 +25,7 @@ class Tree
     new_node = Node.new(data)
     return @root = new_node if empty?
 
-    parent = stop_at(new_node, &:leaf?)
+    parent = scan_tree(new_node, &:leaf?)
     parent.same?(new_node) ? nil : parent.make_baby(new_node)
   end
 
@@ -33,6 +33,9 @@ class Tree
     return if find(value).nil?
 
     # consider what happens:
+    #   either find the node or don't.
+
+    del = find(value)
     #   node is a leaf
     #   node has one child
     #   node has two children
