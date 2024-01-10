@@ -22,7 +22,6 @@ module Search
 
   def find(value)
     return if empty?
-    return @root.data if value == @root.data
 
     node = Node.new(value)
     closest = stop_at(node) { |curr| curr.leaf? || node.same?(curr) }

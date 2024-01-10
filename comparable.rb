@@ -3,9 +3,9 @@
 # compare nodes using data.
 module Comparable
   def compare(nodes)
-    nil_to_zero = ->(node) { node.nil? && node.data = 0 }
+    clean_data = ->(node) { node.data.nil? ? 0 : node.data }
 
-    nodes.map { |node| nil_to_zero.call(node) }.sort
+    nodes = nodes.map { |node| clean_data.call(node) }
     nodes[0] <=> nodes[1]
   end
 

@@ -9,6 +9,11 @@ module TestArrays
   REALLY_LONG = Array.new(64) { rand(1..100) }
 end
 
-Tree.new(TestArrays::BASIC_ARR).pretty_print
-Tree.new(TestArrays::LONG_BASIC).pretty_print
-Tree.new(TestArrays::REALLY_LONG).pretty_print
+foo = Tree.new(TestArrays::BASIC_ARR)
+bar = Tree.new(TestArrays::LONG_BASIC)
+baz = Tree.new(TestArrays::REALLY_LONG)
+
+foo.pretty_print
+foo.insert(-1)
+
+foo.pretty_print
