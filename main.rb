@@ -14,6 +14,8 @@ bar = Tree.new(TestArrays::LONG_BASIC)
 baz = Tree.new(TestArrays::REALLY_LONG)
 
 foo.pretty_print
-foo.insert(1)
+foo.insert(100)
 
 foo.pretty_print
+
+baz.pretty_print
