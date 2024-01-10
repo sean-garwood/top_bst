@@ -17,6 +17,6 @@ foo.insert(100)
 
 foo.pretty_print
 
-puts "here it is: 100! -=-#{foo.find(100).data}-=-"
+puts "here it is: 100! -=-#{foo.find(100).data}"
 
 # baz.pretty_print
