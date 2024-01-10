@@ -32,6 +32,26 @@ class Tree
   def delete(value)
     return if find(value).nil?
 
+    # consider what happens:
+    #   node is a leaf
+    #   node has one child
+    #   node has two children
+
+    # node is leaf
+    #   delete node from tree
+    #   set parent.[dir] = nil
+    # dir = last direction
+    # curr = node thatt
+
+    # need to remember parent, or last visited element, then set any children
+    # equal to node to nil
+
+    # node has one child
+    #   replace deleted node with its child
+    #     set del.parent = del.child
+
+    # node has two children
+    #   find 'inorder' successor of node
   end
 
   def empty?
@@ -49,8 +69,6 @@ class Tree
 
     node.left = build_tree(arr[..mid - 1]) unless arr[..mid - 1].empty?
     node.right = build_tree(arr[mid + 1..]) unless arr[mid + 1..].empty?
-    # for some reason,
-    # `unless mid.zero?` clause here cuts off the greatest element.
     node
   end
 end
