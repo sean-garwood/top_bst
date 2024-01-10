@@ -13,15 +13,19 @@ class Node
     @right = nil
   end
 
+  def make_baby(child)
+    less_than?(child) ? @right = child : @left = child
+  end
+
   def leaf?
     @left.nil? && @right.nil?
   end
 
   def one_child?
-    @rright.nil?
+    @left.nil? || @right.nil?
   end
 
-  def make_baby(child)
-    less_than?(child) ? @right = child : @left = child
+  def parent_of?(child)
+    @left.same?(child) || @right.same?(child)
   end
 end
