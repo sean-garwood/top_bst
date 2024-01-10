@@ -25,7 +25,8 @@ class Tree
     new_node = Node.new(data)
     return @root = new_node if empty?
 
-    find_parent(new_node).make_baby(new_node)
+    parent = find_parent(new_node)
+    parent.same?(new_node) ? nil : parent.make_baby(new_node)
   end
 
   def empty?
