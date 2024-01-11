@@ -11,7 +11,7 @@ class Node
     @data = data
     @left = nil
     @right = nil
-    @kids = proc { [@left, @right] unless leaf? }
+    @kids = proc { [@left, @right] }
   end
 
   def make_baby(child)
