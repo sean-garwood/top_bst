@@ -7,10 +7,18 @@ require_relative 'lib/search'
 require_relative 'lib/node'
 require_relative 'lib/tree'
 
-series = proc { |len| Tree.new(Array(1..len)) }
-random = proc { |len, min, max| Tree.new(Array.new(len) { rand(min..max) }) }
+MIN = 1
+MAX = 48
 
-foo = random.call(256, 1, 99999)
+def series(len = MAX)
+  Tree.new(Array(1..len))
+end
+
+def random_tree(len = MAX, min = MIN, max = len)
+  Tree.new(Array.new(len) { rand(min..max) })
+end
+
+foo = random_tree
 
 foo.pretty_print
 foo.delete(foo.root.right.data)
