@@ -20,5 +20,5 @@ end
 
 foo = series(8)
 p foo.level_order
-foo.level_order { |n| n.data *= 2 }
+foo.level_order { |n| puts n.data * 2 }
 foo.pretty_print
