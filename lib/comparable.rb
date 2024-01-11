@@ -3,8 +3,8 @@
 # compare nodes using data.
 module Comparable
   def compare(nodes)
-    nodes = nodes.map { |node| node.data.nil? ? 0 : node.data }
-    nodes[0] <=> nodes[1]
+    no_nils = nodes.map { |node| node.data.nil? ? 0 : node.data }
+    no_nils[0] <=> no_nils[1]
   end
 
   def same?(other)
