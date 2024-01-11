@@ -1,16 +1,17 @@
 # frozen_string_literal: true
 
 # element in a binary search tree.
-# contains @data, which is a value, and two pointers: @left and @right, which
-# point to the @root of the child nodes
 class Node
   include Comparable
+  include PrettyPrintz
   attr_accessor :data, :left, :right
+  attr_reader :kids
 
   def initialize(data)
     @data = data
     @left = nil
     @right = nil
+    @kids = proc { [@left, @right] unless leaf? }
   end
 
   def make_baby(child)
@@ -26,6 +27,12 @@ class Node
   end
 
   def parent_of?(child)
-    @left.same?(child) || @right.same?(child)
+    if leaf?
+      nil
+    elsif one_child?
+      @left.nil? ? @right.same?(child) : @left.same?(child)
+    else
+      @left.same?(child) || @right.same?(child)
+    end
   end
 end
