@@ -9,6 +9,8 @@ module Search
   end
 
   def scan_tree(node, curr = @root)
+    return curr if yield(curr)
+
     loop do
       curr = next_node(node, curr)
       break if yield(curr)
