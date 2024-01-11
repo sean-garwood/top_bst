@@ -18,8 +18,7 @@ def random_tree(len = MAX, min = MIN, max = len)
   Tree.new(Array.new(len) { rand(min..max) })
 end
 
-foo = random_tree
-
-foo.pretty_print
-foo.delete(foo.root.right.data)
+foo = series(8)
+p foo.level_order
+foo.level_order { |n| n.data *= 2 }
 foo.pretty_print

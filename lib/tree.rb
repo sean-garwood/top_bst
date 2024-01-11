@@ -39,6 +39,26 @@ class Tree
     del
   end
 
+  def level_order(&block)
+    return @arr unless block_given?
+
+    curr = @root
+    collected = [@root]
+    queue = []
+    loop do
+      curr.kids.call.each do |k|
+        next if k.nil?
+
+        queue << k
+        collected << k
+      end
+      curr = queue.shift
+      break if queue.empty?
+    end
+
+    yield collected.shift until collected.empty?
+  end
+
   def empty?
     @root.nil?
   end
