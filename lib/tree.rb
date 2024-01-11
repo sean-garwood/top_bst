@@ -3,6 +3,7 @@
 # Build BST from an array.
 class Tree
   include Comparable
+  include PrettyPrintz
   include Search
   attr_accessor :root
   attr_reader :arr
@@ -10,12 +11,6 @@ class Tree
   def initialize(arr = [])
     @arr = arr.uniq.sort
     @root = build_tree(@arr)
-  end
-
-  def pretty_print(node = @root, prefix = '', is_left = true)
-    pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
-    puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
-    pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
   end
 
   def insert(data)
@@ -29,36 +24,18 @@ class Tree
   def delete(data)
     return if empty? || find(data).nil?
 
-    # either find the node or don't.
-
     del = find(data)
-    # need to remember parent, or last visited element, then set any children
-    # equal to node to nil
+    in_order = ->(kids) { kids[0].less_than?(kids[1]) ? kids : kids.reverse }
     parent = scan_tree(del) { |curr| curr.parent_of?(del) }
-
-    # three cases:
-    #   node is a leaf
-    #   node has one child
-    #   node has two children
-
-    # node is leaf
+    orphans = in_order.call(del.kids.call) unless del.leaf?
     if del.leaf?
-      parent.less_than?(del) ? parent.right = nil : parent.left = nil
+      del.greater_than?(parent) ? parent.right = nil : parent.left = nil
+    elsif del.one_child?
+      parent.make_baby(orphans.compact[0])
     else
-      puts 'fail'
+      del.greater_than?(parent) ? parent.right = orphans[0] : parent.left = orphans[0]
+      orphans[0].right = orphans[1]
     end
-
-    # node has one child
-    # elsif del.one_child?
-    #   @del.right.nil? ? parent
-
-
-    # node has one child
-    #   replace deleted node with its child
-    #     set del.parent = del.child
-
-    # node has two children
-    #   find 'inorder' successor of node
     del
   end
 

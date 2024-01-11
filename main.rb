@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'lib/comparable'
+require_relative 'lib/pretty_print'
 require_relative 'lib/search'
 
 require_relative 'lib/node'
@@ -12,15 +13,18 @@ module TestArrays
   REALLY_LONG = Array.new(64) { rand(1..100) }.freeze
 end
 
-foo = Tree.new(TestArrays::BASIC_ARR)
-bar = Tree.new(TestArrays::LONG_BASIC)
-baz = Tree.new(TestArrays::REALLY_LONG)
 
-foo.insert(100)
+basic = proc { Tree.new(TestArrays::BASIC_ARR) }
+longer_basic = proc { Tree.new(TestArrays::LONG_BASIC) }
+long = proc { Tree.new(TestArrays::REALLY_LONG) }
+custom = proc { |len, min, max| Tree.new(Array.new(len) { rand(min..max) }) }
 
+foo = longer_basic.call
+puts 'initial tree'
 foo.pretty_print
-
-puts "here it is: 100! -=-#{foo.find(100).data}"
-
-bar.delete(1)
-bar.pretty_print
+puts 'deleted 8:'
+foo.delete(8)
+foo.pretty_print
+puts 'deleted 3:'
+foo.delete(3)
+foo.pretty_print
