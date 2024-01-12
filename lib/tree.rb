@@ -40,8 +40,6 @@ class Tree
   end
 
   def level_order(&block)
-    return @arr unless block_given?
-
     curr = @root
     collected = [@root]
     queue = []
@@ -55,6 +53,7 @@ class Tree
       curr = queue.shift
       break if queue.empty?
     end
+    return collected.map(&:data) unless block_given?
 
     yield collected.shift until collected.empty?
   end
