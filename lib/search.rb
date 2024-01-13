@@ -21,8 +21,8 @@ module Search
   def find(data)
     return if empty?
 
-    proxy = Node.new(data)
-    closest = scan_tree(proxy) { |curr| (curr.leaf? || proxy.same?(curr)) }
-    closest.same?(proxy) && closest || nil
+    node = Node.new(data)
+    closest = scan_tree(node) { |curr| (curr.leaf? || node.same?(curr)) }
+    closest.same?(node) && closest || nil
   end
 end
