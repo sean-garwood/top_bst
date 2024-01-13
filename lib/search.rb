@@ -2,18 +2,15 @@
 
 # Search for nodes in the BST.
 module Search
-  def next_node(node, curr = @root)
-    return if curr.leaf?
-
-    node.less_than?(curr) ? curr.left : curr.right
-  end
-
-  def scan_tree(node, curr = @root)
+  def scan_for(node, curr = @root)
     return curr if yield(curr)
 
-    loop do
-      curr = next_node(node, curr)
-      break if yield(curr)
+    next_dir = proc { |n, c| n.less_than?(c) ? c.left : c.right }
+
+    until yield(curr)
+      return curr if next_dir.call(node, curr).nil?
+
+      curr = next_dir.call(node, curr)
     end
     curr
   end
@@ -22,7 +19,7 @@ module Search
     return if empty?
 
     node = Node.new(data)
-    closest = scan_tree(node) { |curr| (curr.leaf? || node.same?(curr)) }
+    closest = scan_for(node) { |curr| (curr.leaf? || node.same?(curr)) }
     closest.same?(node) && closest || nil
   end
 end

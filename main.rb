@@ -18,7 +18,13 @@ def random_tree(len = MAX, min = MIN, max = len)
   Tree.new(Array.new(len) { rand(min..max) })
 end
 
-foo = random_tree(8)
+foo = series(8)
 p foo.level_order
 foo.level_order { |n| puts n.data }
+foo.pretty_print
+
+foo.delete(6)
+foo.pretty_print
+
+foo.insert(6) # FIXIT: looks at the original tree, so
 foo.pretty_print
