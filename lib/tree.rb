@@ -6,11 +6,13 @@ class Tree
   include PrettyPrintz
   include Search
   attr_accessor :root
-  attr_reader :arr
+  attr_reader :arr, :leftmost, :rightmost
 
   def initialize(arr = [])
     @arr = arr.uniq.sort
     @root = build_tree(@arr)
+    @leftmost = go_furthest(&:left)
+    @rightmost = go_furthest(&:right)
   end
 
   def insert(data)
@@ -62,6 +64,7 @@ class Tree
     @root.nil?
   end
 
+
   private
 
   attr_writer :arr
@@ -74,5 +77,11 @@ class Tree
     node.left = build_tree(arr[..mid - 1]) unless arr[..mid - 1].empty?
     node.right = build_tree(arr[mid + 1..]) unless arr[mid + 1..].empty?
     node
+  end
+
+  def go_furthest(curr = @root, &dir)
+    curr = dir.call(curr) until dir.call(curr).nil?
+
+    curr
   end
 end
