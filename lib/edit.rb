@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 # remove/insert data from tree
 module Edit
