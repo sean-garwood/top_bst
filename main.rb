@@ -21,12 +21,14 @@ def random_tree(len = MAX, min = MIN, max = len)
 end
 
 
-foo = series(10)
+foo = series(7)
 
 foo.pretty_print
 
 p foo.level_order
-foo.root.in_order { |n| puts n.data**2 }
-
-foo.root.pre_order { |n| puts n.data**2 }
-foo.root.post_order { |n| puts n.data**2 }
+puts 'in order'
+foo.root.in_order { |n| puts n.data }
+puts 'pre'
+foo.root.pre_order { |n| puts n.data }
+puts 'post'
+foo.root.post_order { |n| puts n.data }

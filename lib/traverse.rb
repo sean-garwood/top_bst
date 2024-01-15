@@ -34,23 +34,21 @@ module Traverse
     right.nil? || right.in_order(&block)
   end
 
-  # FIXIT - CRASHES PROGRAM
   # NLR
-  def pre_order
+  def pre_order(&block)
     return if nil?
 
     block.call(self)
-    left.nil? || left.in_order(&block)
-    right.nil? || right.in_order(&block)
+    left.nil? || left.pre_order(&block)
+    right.nil? || right.pre_order(&block)
   end
 
-  # FIXIT - CRASHES PROGRAM
   # LRN
-  def post_order
+  def post_order(&block)
     return if nil?
 
-    left.nil? || left.in_order(&block)
-    right.nil? || right.in_order(&block)
+    left.nil? || left.post_order(&block)
+    right.nil? || right.post_order(&block)
     block.call(self)
   end
 end
