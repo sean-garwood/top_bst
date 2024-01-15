@@ -22,43 +22,35 @@ module Traverse
     end
     return collected.map(&:data) unless block_given?
 
-    yield collected.shift until collected.empty?
+    block.call(collected.shift) until collected.empty?
   end
 
+  # LNR
   def in_order(&block)
+    return if nil?
 
-    stack = []
-    coll = []
+    left.nil? || left.in_order(&block)
+    block.call(self)
+    right.nil? || right.in_order(&block)
   end
 
-  def stack_nodes
-    # build a stack to yield to the blocks
+  # FIXIT - CRASHES PROGRAM
+  # NLR
+  def pre_order
+    return if nil?
+
+    block.call(self)
+    left.nil? || left.in_order(&block)
+    right.nil? || right.in_order(&block)
   end
 
-  def left_subtree
+  # FIXIT - CRASHES PROGRAM
+  # LRN
+  def post_order
+    return if nil?
 
-    # stack up the kids from the left side of the bst
-  end
-
-  def right_subtree
-    # stack up kids from right side
+    left.nil? || left.in_order(&block)
+    right.nil? || right.in_order(&block)
+    block.call(self)
   end
 end
-
-# dfs traversal methods
-
-# inorder = Left -> node => right
-
-# trav left sub
-# root
-# right
-
-# remember, every node is either a leaf or the root of some subtree. so to check
-# the nodes in our initial tree, we think of root.left and root.right as being
-# the left_sub.root and right_sub.root of the subtrees of the initial tree.
-
-# we therefore go left until we reach a node that does not have a left child and
-# add it to the collection.
-# then we add its parent to the collection, as well as parent.right.
-# then we would traverse the children of parent.right
-# a balanced bst will not have any more than one node after this step

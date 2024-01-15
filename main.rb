@@ -20,22 +20,13 @@ def random_tree(len = MAX, min = MIN, max = len)
   Tree.new(Array.new(len) { rand(min..max) })
 end
 
-foo = series(8)
+
+foo = series(10)
+
+foo.pretty_print
+
 p foo.level_order
-foo.level_order { |n| puts n.data }
-foo.pretty_print
+foo.root.in_order { |n| puts n.data**2 }
 
-foo.delete(6)
-foo.pretty_print
-
-foo.insert(6)
-foo.pretty_print
-
-bar = [1, 3, 5, 7, 9]
-baz = Tree.new(bar)
-
-baz.insert(8)
-
-baz.pretty_print
-
-puts baz.rightmost.data
+foo.root.pre_order { |n| puts n.data**2 }
+foo.root.post_order { |n| puts n.data**2 }
