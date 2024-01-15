@@ -4,6 +4,7 @@
 class Node
   include Comparable
   include PrettyPrintz
+  include Traverse
   attr_accessor :data, :left, :right
   attr_reader :kids
 
