@@ -26,3 +26,7 @@ bar.pretty_print
 puts "#{bar.depth(bar.find(MAX))} should be 4"
 puts "#{bar.depth(bar.root)} should be 0"
 puts bar.levels
+puts bar.balanced?
+bar.insert(-10_000)
+bar.insert(-100_000)
+puts bar.balanced?

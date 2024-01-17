@@ -36,6 +36,13 @@ class Tree
     d
   end
 
+  def balanced?
+
+    # find height of left and right subtrees
+    subtree_height_diff = (@root.right.height - @root.left.height).abs
+    subtree_height_diff == 1 || subtree_height_diff.zero?
+  end
+
   def empty?
     @root.nil?
   end
