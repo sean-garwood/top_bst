@@ -26,29 +26,53 @@ module Traverse
   end
 
   # LNR
-  def in_order(&block)
+  def in_order(queue = [], &block)
     return if nil?
 
-    left.nil? || left.in_order(&block)
-    block.call(self)
-    right.nil? || right.in_order(&block)
+    if block_given?
+      left.nil? || left.in_order(&block)
+      block.call(self)
+      right.nil? || right.in_order(&block)
+    else
+      left.nil? || left.in_order(queue)
+      queue << self
+      right.nil? || right.in_order(queue)
+    end
+
+    return queue unless block_given?
   end
 
   # NLR
-  def pre_order(&block)
+  def pre_order(queue = [], &block)
     return if nil?
 
-    block.call(self)
-    left.nil? || left.pre_order(&block)
-    right.nil? || right.pre_order(&block)
+    if block_given?
+      block.call(self)
+      left.nil? || left.pre_order(&block)
+      right.nil? || right.pre_order(&block)
+    else
+      queue << self
+      left.nil? || left.pre_order(queue)
+      right.nil? || right.pre_order(queue)
+    end
+
+    return queue unless block_given?
   end
 
   # LRN
-  def post_order(&block)
+  def post_order(queue = [], &block)
     return if nil?
 
-    left.nil? || left.post_order(&block)
-    right.nil? || right.post_order(&block)
-    block.call(self)
+    if block_given?
+      left.nil? || left.pre_order(&block)
+      right.nil? || right.pre_order(&block)
+      block.call(self)
+    else
+      left.nil? || left.pre_order(queue)
+      right.nil? || right.pre_order(queue)
+      queue << self
+    end
+
+    return queue unless block_given?
   end
 end
