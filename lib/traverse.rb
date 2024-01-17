@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
 # modules to traverse the tree in different orders:
-#   level
-#   pre
-#   post
-#   in
 module Traverse
   def level_order(&block)
     curr = @root
@@ -39,7 +35,7 @@ module Traverse
       right.nil? || right.in_order(queue)
     end
 
-    return queue unless block_given?
+    queue unless block_given?
   end
 
   # NLR
@@ -56,7 +52,7 @@ module Traverse
       right.nil? || right.pre_order(queue)
     end
 
-    return queue unless block_given?
+    queue unless block_given?
   end
 
   # LRN
@@ -73,6 +69,6 @@ module Traverse
       queue << self
     end
 
-    return queue unless block_given?
+    queue unless block_given?
   end
 end

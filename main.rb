@@ -25,17 +25,18 @@ foo = series(9)
 
 foo.pretty_print
 
-p foo.level_order
-in_queue = foo.root.in_order
-pre_queue = foo.root.pre_order
-post_queue = foo.root.post_order
-puts 'in order'
-in_queue.each { |n| puts n.data }
-puts 'pre order'
-pre_queue.each { |n| puts n.data }
-puts 'post order'
-post_queue.each { |n| puts n.data }
+# p foo.level_order
+# in_queue = foo.root.in_order
+# pre_queue = foo.root.pre_order
+# post_queue = foo.root.post_order
+# puts 'in order'
+# in_queue.each { |n| puts n.data }
+# puts 'pre order'
+# pre_queue.each { |n| puts n.data }
+# puts 'post order'
+# post_queue.each { |n| puts n.data }
 # puts 'pre'
 # foo.root.pre_order { |n| puts n.data }
 # puts 'post'
 # foo.root.post_order { |n| puts n.data }
+puts foo.root.height

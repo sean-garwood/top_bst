@@ -15,6 +15,18 @@ class Node
     @kids = -> { [@left, @right] }
   end
 
+  def height
+    return -1 if nil?
+
+    left_height = 0
+    right_height = 0
+    left.nil? || left_height = left.height
+    right.nil? || right_height = right.height
+    return left_height + 1 if left_height > right_height
+
+    right_height + 1
+  end
+
   def make_baby(child)
     less_than?(child) ? @right = child : @left = child
   end
