@@ -16,16 +16,12 @@ class Node
   end
 
   def height
-    return -1 if nil?
+    left.nil? ? left_height = -1 : left_height = left.height
+    right.nil? ? right_height = -1 : right_height = right.height
 
-    left_height = 0
-    right_height = 0
-    left.nil? || left_height = left.height
-    right.nil? || right_height = right.height
-    return left_height + 1 if left_height > right_height
-
-    right_height + 1
+    [left_height, right_height].max + 1
   end
+
 
   def make_baby(child)
     less_than?(child) ? @right = child : @left = child

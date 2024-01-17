@@ -20,8 +20,7 @@ def random_tree(len = MAX, min = MIN, max = len)
   Tree.new(Array.new(len) { rand(min..max) })
 end
 
-
-foo = series(9)
+foo = series(7)
 
 foo.pretty_print
 
