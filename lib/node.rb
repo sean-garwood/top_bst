@@ -16,10 +16,10 @@ class Node
   end
 
   def height
-    left.nil? ? left_height = -1 : left_height = left.height
-    right.nil? ? right_height = -1 : right_height = right.height
+    lh = left.nil? && -1 || left.height
+    rh = right.nil? && -1 || right.height
 
-    [left_height, right_height].max + 1
+    [lh, rh].max + 1
   end
 
 
