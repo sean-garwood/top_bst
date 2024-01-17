@@ -4,6 +4,7 @@
 class Node
   include Comparable
   include PrettyPrintz
+  include Search
   include Traverse
   attr_accessor :data, :left, :right
   attr_reader :kids
@@ -18,9 +19,8 @@ class Node
   def height
     return -1 if data.nil?
 
-    lh = left.nil? && -1 || left.height
-    rh = right.nil? && -1 || right.height
-
+    lh = @left.nil? && -1 || @left.height
+    rh = @right.nil? && -1 || @right.height
     [lh, rh].max + 1
   end
 

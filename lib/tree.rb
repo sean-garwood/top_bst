@@ -8,13 +8,32 @@ class Tree
   include Search
   include Traverse
   attr_accessor :root
-  attr_reader :arr, :leftmost, :rightmost
+  attr_reader :arr, :leftmost, :rightmost, :levels
 
   def initialize(arr = [])
     @arr = arr.uniq.sort
     @root = build_tree(@arr)
     @leftmost = go_furthest(&:left)
     @rightmost = go_furthest(&:right)
+    @levels = [depth(leftmost), depth(rightmost)].max
+  end
+
+  def depth(node, curr = @root)
+    return 0 if curr.leaf? || node.same?(curr)
+
+    d = 1
+    any_kids_same = ->(n, c) { c.kids.call.any? { |k| n.same?(k) } }
+    until node.same?(curr) || any_kids_same.call(node, curr)
+      return d + 1 if any_kids_same.call(node, curr)
+
+      d += 1
+      if curr.one_child?
+        curr = curr.kids.call[0]
+      else
+        node.greater_than?(curr) ? curr = curr.right : curr = curr.left
+      end
+    end
+    d
   end
 
   def empty?
