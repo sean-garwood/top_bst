@@ -4,11 +4,7 @@ Ruby implementation of a binary search tree built to spec of The Odin Project
 
 ## Assignment
 
- <!--completed steps below-->
-
-10. Write a #balanced? method that checks if the tree is balanced. A balanced tree is one where the difference between heights of left subtree and right subtree of every node is not more than 1.
-
-11. Write a #rebalance method which rebalances an unbalanced tree. Tip: You’ll want to use a traversal method to provide a new array to the #build_tree method.
+[completed] steps below.
 
 ### driver script
 
@@ -64,3 +60,7 @@ You may be tempted to implement these methods using the original input array, bu
 8. Write a #height method that accepts a node and returns its height. Height is defined as the number of edges in longest path from a given node to a leaf node.
 
 9. Write a #depth method that accepts a node and returns its depth. Depth is defined as the number of edges in path from a given node to the tree’s root node.
+
+10. Write a #balanced? method that checks if the tree is balanced. A balanced tree is one where the difference between heights of left subtree and right subtree of every node is not more than 1.
+
+11. Write a #rebalance method which rebalances an unbalanced tree. Tip: You’ll want to use a traversal method to provide a new array to the #build_tree method.
