@@ -3,11 +3,13 @@
 # remove/insert data from tree
 module Edit
   def insert(data)
-    new_node = Node.new(data)
-    return @root = new_node if empty?
+    return Tree.new([data]) if @root.nil?
 
+    new_node = Node.new(data)
     parent = scan_for(new_node, &:leaf?)
-    parent.same?(new_node) ? nil : parent.make_baby(new_node)
+    return if parent.same?(new_node)
+
+    parent.less_than?(new_node) ? parent.right = new_node : parent.left = new_node
   end
 
   def delete(data)
