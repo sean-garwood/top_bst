@@ -2,7 +2,7 @@
 
 # Search for nodes in the BST.
 module Search
-  def scan_for(node, curr = @root)
+  def scan_for(node, curr = root)
     return curr if yield(curr)
 
     next_dir = proc { |n, c| n.less_than?(c) ? c.left : c.right }
@@ -16,7 +16,7 @@ module Search
   end
 
   def find(data)
-    return if empty?
+    return if root.nil?
 
     node = Node.new(data)
     closest = scan_for(node) { |curr| (curr.leaf? || node.same?(curr)) }
