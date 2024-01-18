@@ -13,9 +13,6 @@ class Tree
   def initialize(arr = [])
     @arr = arr.uniq.sort
     @root = build_tree(@arr)
-    @leftmost = go_furthest(&:left)
-    @rightmost = go_furthest(&:right)
-    @levels = [depth(leftmost), depth(rightmost)].max
   end
 
   def depth(node, curr = @root)
@@ -36,12 +33,12 @@ class Tree
     d
   end
 
-  def balanced?
-    [0, 1].include?((@root.right.height - @root.left.height).abs)
+  def rebalance
+    Tree.new(root.in_order)
   end
 
-  def empty?
-    @root.nil?
+  def balanced?
+    [0, 1].include?((root.right.height - root.left.height).abs)
   end
 
   private
@@ -56,11 +53,5 @@ class Tree
     node.left = build_tree(arr[..mid - 1]) unless arr[..mid - 1].empty?
     node.right = build_tree(arr[mid + 1..]) unless arr[mid + 1..].empty?
     node
-  end
-
-  def go_furthest(curr = @root, &dir)
-    curr = dir.call(curr) until dir.call(curr).nil?
-
-    curr
   end
 end
