@@ -29,4 +29,8 @@ module Edit
     end
     del
   end
+
+  def rebalance
+    Tree.new(root.in_order)
+  end
 end

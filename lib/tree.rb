@@ -33,14 +33,6 @@ class Tree
     d
   end
 
-  def rebalance
-    Tree.new(root.in_order)
-  end
-
-  def rebalance
-    Tree.new(root.in_order)
-  end
-
   def balanced?
     [0, 1].include?((root.right.height - root.left.height).abs)
   end
