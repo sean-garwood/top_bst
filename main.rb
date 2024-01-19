@@ -52,5 +52,4 @@ puts rebalanced = top_tree.rebalance
 puts 'rebalanced tree'
 puts "Is the tree balanced? #{rebalanced.balanced?}"
 
-
-print_orders(top_tree)
+print_orders(rebalanced)
