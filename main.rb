@@ -35,3 +35,9 @@ puts "\nLevel: #{top_tree.level_order}"
 puts "\nPre (NLR): #{top_tree.root.pre_order}"
 puts "\nPost (LRN): #{top_tree.root.post_order}"
 puts "\nIn (LNR): #{top_tree.root.in_order}"
+top_tree.insert(-100)
+top_tree.insert(-101)
+top_tree.rebalance
+puts "\nIn (LNR): #{top_tree.root.in_order}"
+
+puts top_tree.rebalance
