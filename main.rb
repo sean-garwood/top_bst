@@ -24,20 +24,33 @@ def random_tree(
   Tree.new(Array.new(len) { rand(val_min..val_max) })
 end
 
-top_tree = random_tree
-puts top_tree
+def print_orders(tree)
+  orders = <<-ORDERS
+  \n---------------ORDERS--------
+  \nLevel: #{tree.level_order}
+  \nPre (NLR): #{tree.root.pre_order}
+  \nPost (LRN): #{tree.root.post_order}
+  \nIn (LNR): #{tree.root.in_order}
+  \n-------------------------------
+  \n
+  ORDERS
+  puts orders
+end
 
+puts "initial tree"
+puts top_tree = random_tree
 puts "Is the tree balanced? #{top_tree.balanced?}"
+print_orders(top_tree)
+top_tree.insert(101)
+top_tree.insert(1001)
+top_tree.insert(10_001)
+top_tree.insert(100.5)
+puts top_tree
+puts "modified tree"
+puts "Is the tree balanced? #{top_tree.balanced?}"
+puts rebalanced = top_tree.rebalance
+puts 'rebalanced tree'
+puts "Is the tree balanced? #{rebalanced.balanced?}"
 
-puts top_tree.root.left.is_a? Tree
-puts "\nORDERS\n--------"
-puts "\nLevel: #{top_tree.level_order}"
-puts "\nPre (NLR): #{top_tree.root.pre_order}"
-puts "\nPost (LRN): #{top_tree.root.post_order}"
-puts "\nIn (LNR): #{top_tree.root.in_order}"
-top_tree.insert(-100)
-top_tree.insert(-101)
-top_tree.rebalance
-puts "\nIn (LNR): #{top_tree.root.in_order}"
 
-puts top_tree.rebalance
+print_orders(top_tree)

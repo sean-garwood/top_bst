@@ -9,7 +9,10 @@ module PrettyPrintz
     pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
   end
 
-  def to_s(msg = "initial tree")
-    "\n#{msg.upcase}#{self.pretty_print}"
+  def to_s
+    msg = <<-MSG
+    \n#{pretty_print}\n
+    ------------------------------------\n
+    MSG
   end
 end
