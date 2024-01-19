@@ -24,10 +24,6 @@ class Node
     [lh, rh].max + 1
   end
 
-  def make_baby(child)
-    less_than?(child) ? @right = child : @left = child
-  end
-
   def leaf?
     @left.nil? && @right.nil?
   end
