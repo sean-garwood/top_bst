@@ -9,24 +9,29 @@ require_relative 'lib/traverse'
 require_relative 'lib/node'
 require_relative 'lib/tree'
 
-MIN = 1
-MAX = 48
 
-def series(len = MAX)
+TEST_LEN = 15
+TEST_RANGE_MIN = 1
+TEST_RANGE_MAX = 100
+
+def series(len = TEST_LEN)
   Tree.new(Array(1..len))
 end
 
-def random_tree(len = MAX, min = MIN, max = len)
-  Tree.new(Array.new(len) { rand(min..max) })
+def random_tree(
+  len = TEST_LEN, val_min = TEST_RANGE_MIN, val_max = TEST_RANGE_MAX
+)
+  Tree.new(Array.new(len) { rand(val_min..val_max) })
 end
 
-bar = series(MAX)
-bar.pretty_print
+top_tree = random_tree
+puts top_tree
 
-puts "#{bar.depth(bar.find(MAX))} should be 4"
-puts "#{bar.depth(bar.root)} should be 0"
-puts bar.levels
-puts bar.balanced?
-bar.insert(-10_000)
-bar.insert(-100_000)
-puts bar.balanced?
+puts "Is the tree balanced? #{top_tree.balanced?}"
+
+puts top_tree.root.left.is_a? Tree
+puts "\nORDERS\n--------"
+puts "\nLevel: #{top_tree.level_order}"
+puts "\nPre (NLR): #{top_tree.root.pre_order}"
+puts "\nPost (LRN): #{top_tree.root.post_order}"
+puts "\nIn (LNR): #{top_tree.root.in_order}"
