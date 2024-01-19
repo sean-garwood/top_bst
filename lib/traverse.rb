@@ -31,7 +31,7 @@ module Traverse
       right.nil? || right.in_order(&block)
     else
       left.nil? || left.in_order(queue)
-      queue << self.data
+      queue << data
       right.nil? || right.in_order(queue)
     end
 
@@ -47,7 +47,7 @@ module Traverse
       left.nil? || left.pre_order(&block)
       right.nil? || right.pre_order(&block)
     else
-      queue << self.data
+      queue << data
       left.nil? || left.pre_order(queue)
       right.nil? || right.pre_order(queue)
     end
@@ -60,13 +60,13 @@ module Traverse
     return if nil?
 
     if block_given?
-      left.nil? || left.pre_order(&block)
-      right.nil? || right.pre_order(&block)
+      left.nil? || left.post_order(&block)
+      right.nil? || right.post_order(&block)
       block.call(self)
     else
-      left.nil? || left.pre_order(queue)
-      right.nil? || right.pre_order(queue)
-      queue << self.data
+      left.nil? || left.post_order(queue)
+      right.nil? || right.post_order(queue)
+      queue << data
     end
 
     queue unless block_given?
