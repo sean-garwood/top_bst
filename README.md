@@ -2,32 +2,8 @@
 
 Ruby implementation of a binary search tree built to spec of The Odin Project
 
+
 ## Assignment
-
-[completed] steps below.
-
-### driver script
-
-Write a driver script that does the following:
-
-1. Create a binary search tree from an array of random numbers (Array.new(15) {
-   rand(1..100) })
-
-2. Confirm that the tree is balanced by calling #balanced?
-
-3. Print out all elements in level, pre, post, and in order
-
-4. Unbalance the tree by adding several numbers > 100
-
-5. Confirm that the tree is unbalanced by calling #balanced?
-
-6. Balance the tree by calling #rebalance
-
-7. Confirm that the tree is balanced by calling #balanced?
-
-8. Print out all elements in level, pre, post, and in order.
-
-### completed
 
 You’ll build a balanced BST in this assignment. Do not use duplicate values because they make it more complicated and result in trees that are much harder to balance. Therefore, be sure to always remove duplicate values or check for an existing value before inserting.
 
@@ -64,3 +40,24 @@ You may be tempted to implement these methods using the original input array, bu
 10. Write a #balanced? method that checks if the tree is balanced. A balanced tree is one where the difference between heights of left subtree and right subtree of every node is not more than 1.
 
 11. Write a #rebalance method which rebalances an unbalanced tree. Tip: You’ll want to use a traversal method to provide a new array to the #build_tree method.
+
+### driver script
+
+Write a driver script that does the following:
+
+1. Create a binary search tree from an array of random numbers (Array.new(15) {
+   rand(1..100) })
+
+2. Confirm that the tree is balanced by calling #balanced?
+
+3. Print out all elements in level, pre, post, and in order
+
+4. Unbalance the tree by adding several numbers > 100
+
+5. Confirm that the tree is unbalanced by calling #balanced?
+
+6. Balance the tree by calling #rebalance
+
+7. Confirm that the tree is balanced by calling #balanced?
+
+8. Print out all elements in level, pre, post, and in order.
