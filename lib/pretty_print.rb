@@ -8,4 +8,8 @@ module PrettyPrintz
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
     pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
   end
+
+  def to_s(msg = "initial tree")
+    "\n#{msg.upcase}#{self.pretty_print}"
+  end
 end
